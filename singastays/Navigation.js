@@ -3,28 +3,18 @@ import { Text, View, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
+// Import components
+import HomeScreen from "./HomeScreen";
+import AttractionScreen from "./AttractionScreen";
+import ProfileScreen from "./ProfileScreen";
+// Import the Logo component
+import Logo from "./assets/logo.svg";
 
-// Components
-function HomeScreen() {
+// Custom header component
+function CustomHeader() {
   return (
-    <View style={styles.container}>
-      <Text>This is the Home Screen!</Text>
-    </View>
-  );
-}
-
-function AttractionScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>This is the Attraction Screen!</Text>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>This is the Profile Screen!</Text>
+    <View style={styles.headerContainer}>
+      <Logo />
     </View>
   );
 }
@@ -34,6 +24,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  headerContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    // height: 60,
+    backgroundColor: "#fff",
+    paddingTop: 25,
+    paddingBottom: 20,
   },
 });
 
@@ -56,13 +54,12 @@ export default function Navigation() {
             }
             return <Icon name={iconName} size={size} color={color} />;
           },
+          tabBarActiveTintColor: "#244D3B", // Change active tab color here
+          tabBarInactiveTintColor: "#44546F", // Change inactive tab color here
+          tabBarLabelStyle: { display: "none" }, // Hide the label
+          tabBarStyle: { paddingTop: 10, paddingBottom: 10 }, // Adjust tab bar style here
+          header: () => <CustomHeader />, // Use the custom header
         })}
-        tabBarOptions={{
-          activeTintColor: "#244D3B", // Change active tab color here
-          inactiveTintColor: "#44546F", // Change inactive tab color here
-          labelStyle: { display: "none" }, // Hide the label
-          style: { padding: 10, height: 200 },
-        }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Attraction" component={AttractionScreen} />
