@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -33,6 +33,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingTop: 25,
     paddingBottom: 20,
+    ...Platform.select({
+      ios: {
+        paddingTop: 55,
+      },
+    }),
   },
 });
 
@@ -53,12 +58,36 @@ export default function Navigation() {
             } else if (rn === "Profile") {
               iconName = focused ? "person" : "person-outline";
             }
-            return <Icon name={iconName} size={size} color={color} />;
+            return <Icon name={iconName} size={size * 1.15} color={color} />;
           },
           tabBarActiveTintColor: "#244D3B", // Change active tab color here
           tabBarInactiveTintColor: "#44546F", // Change inactive tab color here
           tabBarLabelStyle: { display: "none" }, // Hide the label
-          tabBarStyle: { paddingTop: 10, paddingBottom: 10 }, // Adjust tab bar style here
+          tabBarStyle: {
+            paddingTop: 20,
+            paddingBottom: 20,
+            height: 70,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+
+            // boxShadow: "30 -30px 30px red",
+            ...Platform.select({
+              ios: {
+                shadowColor: "#585555",
+                shadowOffset: { width: 5, height: -2 },
+                shadowOpacity: 0.2,
+                shadowRadius: 30,
+                borderTopWidth: 0,
+              },
+              android: {
+                elevation: 30,
+                shadowColor: "#585555",
+                shadowOffset: { width: 5, height: -2 },
+                shadowOpacity: 0.2,
+                shadowRadius: 30,
+              },
+            }),
+          },
           header: () => <CustomHeader />, // Use the custom header
         })}
       >

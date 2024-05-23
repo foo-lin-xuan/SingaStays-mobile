@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Button, ScrollView, } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, } from "react-native";
 import { globalStyles } from "./styles.js";
 import profile from "./assets/profile.jpg";
 import dustbin from "./assets/dustbin.png";
 import avatar from "./assets/avatar.png";
 
 export default function ProfileScreen() {
-  
+
   return (
     <View style={styles.container}>
       <ScrollView>
