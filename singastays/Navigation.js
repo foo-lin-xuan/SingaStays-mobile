@@ -8,7 +8,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./HomeScreen";
 import AttractionScreen from "./AttractionScreen";
 import ProfileScreen from "./ProfileScreen";
-import AttractionDetail from "./AttractionDetail";
+// import LoginScreen from "./LoginScreen";
 // Import the Logo component
 import Logo from "./assets/logo.svg";
 
