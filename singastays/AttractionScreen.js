@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function AttractionScreen() {
+export default function AttractionScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>This is the Attraction Screen!</Text>
