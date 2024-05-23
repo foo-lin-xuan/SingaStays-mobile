@@ -67,7 +67,7 @@ export default function Navigation() {
         {/* Change AttractionScreen to AttractionDetail for testing */}
         {/* <Tab.Screen name="Attraction" component={AttractionScreen} /> */}
         <Tab.Screen name="Attraction" component={AttractionDetail} />
-        <Tab.Screen name="Profile" component={LoginScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
