@@ -11,7 +11,7 @@ import { globalStyles } from "./styles";
 import attractionOne from "./assets/attractionOne.jpg";
 import Tag from "./Tag";
 
-export default function AttractionDetail() {
+export default function AttractionDetail({ navigation }) {
   let region = {
     latitude: 1.251944,
     longitude: 103.816944,

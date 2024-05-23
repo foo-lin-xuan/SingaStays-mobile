@@ -8,6 +8,8 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
+import { createStackNavigator } from "@react-navigation/stack"; // Import createStackNavigator
 import banner from "./assets/banner.jpg";
 import { globalStyles } from "./styles.js";
 // import { Tag } from "./Tag.js";
@@ -23,6 +25,11 @@ import attractionFour from "./assets/attractionFour.jpg";
 
 export default function HomeScreen({ navigation }) {
   //   console.log("Rendering HomeScreen with globalStyles:", globalStyles);
+  // const navigation = useNavigation(); // Get the navigation object
+  // // Define a function to handle navigation to AttractionScreen
+  // const handleExploreSingapore = () => {
+  //   navigation.navigate("AttractionScreen");
+  // };
 
   return (
     <View style={styles.container}>
@@ -45,7 +52,11 @@ export default function HomeScreen({ navigation }) {
               tailored accommodations for a perfect blend of comfort and
               adventure. Your unforgettable experience begins here.
             </Text>
-            <TouchableOpacity style={globalStyles.buttonPrimaryContainer}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("AttractionScreen")}
+              style={globalStyles.buttonPrimaryContainer}
+              activeOpacity={1}
+            >
               <Text style={globalStyles.buttonPrimary}>Explore Singapore</Text>
             </TouchableOpacity>
           </View>
@@ -72,7 +83,11 @@ export default function HomeScreen({ navigation }) {
                 horizontal={true}
                 contentContainerStyle={styles.frame}
               >
-                <View style={styles.overlapGroup}>
+                <TouchableOpacity
+                  style={styles.overlapGroup}
+                  activeOpacity={1}
+                  onPress={() => navigation.navigate("AttractionDetail")}
+                >
                   <Image source={inspoOne} style={styles.Inspoimage} />
                   <View style={styles.heartComponent}>
                     <Heart />
@@ -80,7 +95,7 @@ export default function HomeScreen({ navigation }) {
                   <View style={styles.textContent}>
                     <Text style={styles.text}>GARDEN BY{"\n"} THE BAY:</Text>
                   </View>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.overlapGroup}>
                   <Image source={inspoTwo} style={styles.Inspoimage} />
                   <View style={styles.heartComponent}>
@@ -110,10 +125,12 @@ export default function HomeScreen({ navigation }) {
                 </View>
               </ScrollView>
               <TouchableOpacity
+                onPress={() => navigation.navigate("AttractionScreen")}
                 style={[
                   globalStyles.buttonPrimaryContainer,
                   globalStyles.textCenter,
                 ]}
+                activeOpacity={1}
               >
                 <Text style={globalStyles.buttonPrimary}>View More</Text>
               </TouchableOpacity>
@@ -132,15 +149,21 @@ export default function HomeScreen({ navigation }) {
               the tags below to explore accommodations tailored to your needs.
             </Text>
             <TouchableOpacity
+              onPress={() => navigation.navigate("AttractionScreen")}
               style={[
                 globalStyles.buttonPrimaryContainer,
                 globalStyles.textCenter,
               ]}
+              activeOpacity={1}
             >
               <Text style={globalStyles.buttonPrimary}>View More</Text>
             </TouchableOpacity>
             <View style={styles.stackFrame}>
-              <View style={styles.stackIndividual}>
+              <TouchableOpacity
+                style={styles.stackIndividual}
+                onPress={() => navigation.navigate("AttractionDetail")}
+                activeOpacity={1}
+              >
                 <View style={styles.stackOverlapGroup}>
                   <Image source={attractionOne} style={styles.stackImage} />
                   <View style={styles.heartComponent}>
@@ -155,7 +178,7 @@ export default function HomeScreen({ navigation }) {
                     needs.
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
               <View style={styles.stackIndividual}>
                 <View style={styles.stackOverlapGroup}>
                   <Image source={attractionTwo} style={styles.stackImage} />

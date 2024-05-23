@@ -1,16 +1,16 @@
 import * as React from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
 // Import components
 import HomeScreen from "./HomeScreen";
 import AttractionScreen from "./AttractionScreen";
 import ProfileScreen from "./ProfileScreen";
-// import LoginScreen from "./LoginScreen";
+import AttractionDetail from "./AttractionDetail";
 // Import the Logo component
 import Logo from "./assets/logo.svg";
-import AttractionDetail from "./AttractionDetail";
 
 // Custom header component
 function CustomHeader() {
@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: "center",
     justifyContent: "center",
-    // height: 60,
     backgroundColor: "#fff",
     paddingTop: 25,
     paddingBottom: 20,
@@ -43,6 +42,29 @@ const styles = StyleSheet.create({
 });
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function MainStackNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="NestedHome" // Rename the nested "Home" screen to "NestedHome"
+        component={HomeScreen}
+        options={{
+          header: () => <CustomHeader />,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="AttractionDetail"
+        component={AttractionDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 export default function Navigation() {
   return (
@@ -54,7 +76,7 @@ export default function Navigation() {
             let rn = route.name;
             if (rn === "Home") {
               iconName = focused ? "home" : "home-outline";
-            } else if (rn === "Attraction") {
+            } else if (rn === "AttractionScreen") {
               iconName = focused ? "location" : "location-outline";
             } else if (rn === "Profile") {
               iconName = focused ? "person" : "person-outline";
@@ -70,8 +92,6 @@ export default function Navigation() {
             height: 70,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
-
-            // boxShadow: "30 -30px 30px red",
             ...Platform.select({
               ios: {
                 shadowColor: "#585555",
@@ -92,10 +112,8 @@ export default function Navigation() {
           header: () => <CustomHeader />, // Use the custom header
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        {/* Change AttractionScreen to AttractionDetail for testing */}
-        {/* <Tab.Screen name="Attraction" component={AttractionScreen} /> */}
-        <Tab.Screen name="Attraction" component={AttractionDetail} />
+        <Tab.Screen name="Home" component={MainStackNavigator} />
+        <Tab.Screen name="AttractionScreen" component={AttractionScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
