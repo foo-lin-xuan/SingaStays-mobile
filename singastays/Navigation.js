@@ -9,6 +9,7 @@ import AttractionScreen from "./AttractionScreen";
 import ProfileScreen from "./ProfileScreen";
 // Import the Logo component
 import Logo from "./assets/logo.svg";
+import AttractionDetail from "./AttractionDetail";
 
 // Custom header component
 function CustomHeader() {
@@ -62,7 +63,9 @@ export default function Navigation() {
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Attraction" component={AttractionScreen} />
+        {/* Change AttractionScreen to AttractionDetail for testing */}
+        {/* <Tab.Screen name="Attraction" component={AttractionScreen} /> */}
+        <Tab.Screen name="Attraction" component={AttractionDetail} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
