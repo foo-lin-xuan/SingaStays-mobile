@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./HomeScreen";
 import AttractionScreen from "./AttractionScreen";
 import ProfileScreen from "./ProfileScreen";
+import LoginScreen from "./LoginScreen";
 // Import the Logo component
 import Logo from "./assets/logo.svg";
 import AttractionDetail from "./AttractionDetail";
@@ -66,7 +67,7 @@ export default function Navigation() {
         {/* Change AttractionScreen to AttractionDetail for testing */}
         {/* <Tab.Screen name="Attraction" component={AttractionScreen} /> */}
         <Tab.Screen name="Attraction" component={AttractionDetail} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Profile" component={LoginScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
