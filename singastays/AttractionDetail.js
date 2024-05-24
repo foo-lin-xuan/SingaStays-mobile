@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { globalStyles } from "./styles";
-import attractionOne from "./assets/attractionOne.jpg";
+import attractionDetail from "./assets/attraction-details.jpg";
 import Tag from "./Tag";
 
 export default function AttractionDetail({ navigation }) {
@@ -21,7 +21,7 @@ export default function AttractionDetail({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Image source={attractionOne} style={styles.image} />
+        <Image source={attractionDetail} style={styles.image} />
         <View style={styles.innerContainer}>
           <View style={globalStyles.section}>
             <View style={globalStyles.line}></View>

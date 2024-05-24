@@ -9,6 +9,7 @@ import HomeScreen from "./HomeScreen";
 import AttractionScreen from "./AttractionScreen";
 import AttractionDetail from "./AttractionDetail";
 import ProfileScreen from "./ProfileScreen";
+import { FavoritesProvider } from "./FavoritesContext";
 // import LoginScreen from "./LoginScreen";
 // Import the Logo component
 import Logo from "./assets/logo.svg";
@@ -69,54 +70,56 @@ function MainStackNavigator() {
 
 export default function Navigation() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            let rn = route.name;
-            if (rn === "Home") {
-              iconName = focused ? "home" : "home-outline";
-            } else if (rn === "AttractionScreen") {
-              iconName = focused ? "location" : "location-outline";
-            } else if (rn === "Profile") {
-              iconName = focused ? "person" : "person-outline";
-            }
-            return <Icon name={iconName} size={size * 1.15} color={color} />;
-          },
-          tabBarActiveTintColor: "#244D3B", // Change active tab color here
-          tabBarInactiveTintColor: "#44546F", // Change inactive tab color here
-          tabBarLabelStyle: { display: "none" }, // Hide the label
-          tabBarStyle: {
-            paddingTop: 20,
-            paddingBottom: 20,
-            height: 70,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-            ...Platform.select({
-              ios: {
-                shadowColor: "#585555",
-                shadowOffset: { width: 5, height: -2 },
-                shadowOpacity: 0.2,
-                shadowRadius: 30,
-                borderTopWidth: 0,
-              },
-              android: {
-                elevation: 30,
-                shadowColor: "#585555",
-                shadowOffset: { width: 5, height: -2 },
-                shadowOpacity: 0.2,
-                shadowRadius: 30,
-              },
-            }),
-          },
-          header: () => <CustomHeader />, // Use the custom header
-        })}
-      >
-        <Tab.Screen name="Home" component={MainStackNavigator} />
-        <Tab.Screen name="AttractionScreen" component={AttractionScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <FavoritesProvider>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              let rn = route.name;
+              if (rn === "Home") {
+                iconName = focused ? "home" : "home-outline";
+              } else if (rn === "AttractionScreen") {
+                iconName = focused ? "location" : "location-outline";
+              } else if (rn === "Profile") {
+                iconName = focused ? "person" : "person-outline";
+              }
+              return <Icon name={iconName} size={size * 1.15} color={color} />;
+            },
+            tabBarActiveTintColor: "#244D3B", // Change active tab color here
+            tabBarInactiveTintColor: "#44546F", // Change inactive tab color here
+            tabBarLabelStyle: { display: "none" }, // Hide the label
+            tabBarStyle: {
+              paddingTop: 20,
+              paddingBottom: 20,
+              height: 70,
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              ...Platform.select({
+                ios: {
+                  shadowColor: "#585555",
+                  shadowOffset: { width: 5, height: -2 },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 30,
+                  borderTopWidth: 0,
+                },
+                android: {
+                  elevation: 30,
+                  shadowColor: "#585555",
+                  shadowOffset: { width: 5, height: -2 },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 30,
+                },
+              }),
+            },
+            header: () => <CustomHeader />, // Use the custom header
+          })}
+        >
+          <Tab.Screen name="Home" component={MainStackNavigator} />
+          <Tab.Screen name="AttractionScreen" component={AttractionScreen} />
+          <Tab.Screen name="Profile" component={ProfileScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </FavoritesProvider>
   );
 }

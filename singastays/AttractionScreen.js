@@ -13,8 +13,28 @@ import attractionTwo from "./assets/attractionTwo.jpg";
 import attractionThree from "./assets/attractionThree.jpg";
 import attractionFour from "./assets/attractionFour.jpg";
 import Heart from "./assets/heart.svg";
+import inspoOne from "./assets/inspoOne.jpg";
+import inspoTwo from "./assets/inspoTwo.jpg";
+import { FavoritesContext } from "./FavoritesContext";
+import { useContext } from "react";
 
 export default function AttractionDetail({ navigation }) {
+  const { addFavorite, removeFavorite, favorites } =
+    useContext(FavoritesContext); // Import removeFavorite here
+
+  const handleAddFavorite = (attraction, image) => {
+    const isAlreadyFavorite = isFavorite(attraction);
+    if (isAlreadyFavorite) {
+      removeFavorite({ name: attraction, image: image });
+    } else {
+      addFavorite({ name: attraction, image: image });
+    }
+  };
+
+  const isFavorite = (attraction) => {
+    return favorites.some((favorite) => favorite.name === attraction);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -36,13 +56,6 @@ export default function AttractionDetail({ navigation }) {
               tailored accommodations for a perfect blend of comfort and
               adventure. Your unforgettable experience begins here.
             </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("AttractionScreen")}
-              style={globalStyles.buttonPrimaryContainer}
-              activeOpacity={1}
-            >
-              <Text style={globalStyles.buttonPrimary}>Explore Singapore</Text>
-            </TouchableOpacity>
           </View>
 
           <View style={globalStyles.section}>
@@ -54,7 +67,8 @@ export default function AttractionDetail({ navigation }) {
               </Text>
             </Text>
             <Text style={[globalStyles.p2, globalStyles.textCenter]}>
-              Discover the perfect stay that suits your preferences. Click on the tags below to explore accommodations tailored to your needs.
+              Discover the perfect stay that suits your preferences. Click on
+              the tags below to explore accommodations tailored to your needs.
             </Text>
           </View>
 
@@ -67,17 +81,22 @@ export default function AttractionDetail({ navigation }) {
               >
                 <View style={styles.stackOverlapGroup}>
                   <Image source={attractionOne} style={styles.stackImage} />
-                  <View style={styles.heartComponent}>
-                    <Heart />
-                  </View>
+                  <TouchableOpacity
+                    style={styles.heartComponent}
+                    activeOpacity={1}
+                    onPress={() =>
+                      handleAddFavorite("Skyline Luge Sentosa", inspoOne)
+                    }
+                  >
+                    <Heart
+                      fill={
+                        isFavorite("Skyline Luge Sentosa") ? "#fff" : "none"
+                      }
+                    />
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.stackTextContent}>
                   <Text style={styles.stackText}>Skyline Luge Sentosa</Text>
-                  <Text style={globalStyles.p2}>
-                    Discover the perfect stay that suits your preferences. Click
-                    on the tags below to explore accommodations tailored to your
-                    needs.
-                  </Text>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
@@ -87,17 +106,20 @@ export default function AttractionDetail({ navigation }) {
               >
                 <View style={styles.stackOverlapGroup}>
                   <Image source={attractionTwo} style={styles.stackImage} />
-                  <View style={styles.heartComponent}>
-                    <Heart />
-                  </View>
+                  <TouchableOpacity
+                    style={styles.heartComponent}
+                    activeOpacity={1}
+                    onPress={() =>
+                      handleAddFavorite("Fort Canning Park", inspoTwo)
+                    }
+                  >
+                    <Heart
+                      fill={isFavorite("Fort Canning Park") ? "#fff" : "none"}
+                    />
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.stackTextContent}>
-                  <Text style={styles.stackText}>Skyline Luge Sentosa</Text>
-                  <Text style={globalStyles.p2}>
-                    Discover the perfect stay that suits your preferences. Click
-                    on the tags below to explore accommodations tailored to your
-                    needs.
-                  </Text>
+                  <Text style={styles.stackText}>Fort Canning Park</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -105,33 +127,29 @@ export default function AttractionDetail({ navigation }) {
               <View style={styles.stackIndividual}>
                 <View style={styles.stackOverlapGroup}>
                   <Image source={attractionThree} style={styles.stackImage} />
-                  <View style={styles.heartComponent}>
-                    <Heart />
-                  </View>
+                  <TouchableOpacity
+                    style={styles.heartComponent}
+                    activeOpacity={1}
+                  >
+                    <Heart fill={isFavorite() ? "#fff" : "none"} />
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.stackTextContent}>
                   <Text style={styles.stackText}>Skyline Luge Sentosa</Text>
-                  <Text style={globalStyles.p2}>
-                    Discover the perfect stay that suits your preferences. Click
-                    on the tags below to explore accommodations tailored to your
-                    needs.
-                  </Text>
                 </View>
               </View>
               <View style={styles.stackIndividual}>
                 <View style={styles.stackOverlapGroup}>
                   <Image source={attractionFour} style={styles.stackImage} />
-                  <View style={styles.heartComponent}>
-                    <Heart />
-                  </View>
+                  <TouchableOpacity
+                    style={styles.heartComponent}
+                    activeOpacity={1}
+                  >
+                    <Heart fill={isFavorite() ? "#fff" : "none"} />
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.stackTextContent}>
                   <Text style={styles.stackText}>Skyline Luge Sentosa</Text>
-                  <Text style={globalStyles.p2}>
-                    Discover the perfect stay that suits your preferences. Click
-                    on the tags below to explore accommodations tailored to your
-                    needs.
-                  </Text>
                 </View>
               </View>
             </View>
@@ -159,12 +177,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   stackFrame: {
-    marginTop: 30,
+    marginTop: 0,
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginBottom: 30,
   },
   stackIndividual: {
     flex: 1,
@@ -180,9 +198,9 @@ const styles = StyleSheet.create({
   },
   stackImage: {
     width: "100%",
-    height: 300,  // Fixed height for all images
-    borderRadius: 10,
-    resizeMode: 'cover',  // Ensures images cover the area uniformly
+    height: 250, // Fixed height for all images
+    borderRadius: 15,
+    resizeMode: "cover", // Ensures images cover the area uniformly
   },
   stackTextContent: {
     marginTop: 20,
