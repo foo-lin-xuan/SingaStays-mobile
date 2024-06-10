@@ -51,13 +51,9 @@ SingaStays Mobile is a mobile application mock-up of [SingaStays](https://github
 
 ## Screenshots
 
-Users can browse and view attractions information.
+Users can browse and view attractions information. [View demo](screenshots/attractions.mp4)
 
-<video controls width="200" src="screenshots/attractions.mp4" type="video/mp4" title="View attractions demo"> Your browser does not support the video tag. </video>
-
-Users can add attractions to favourites and view them in the profile page.
-
-<video controls width="200" src="screenshots/favourites.mp4" type="video/mp4" title="Favourites demo"> Your browser does not support the video tag. </video>
+Users can add attractions to favourites and view them in the profile page. [View demo](screenshots/favourites.mp4)
 
 ## Limitations
 
